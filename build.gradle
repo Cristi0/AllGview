@@ -1,0 +1,27 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.0.8'
+}
+
+group 'org.allgview'
+version '1.0-Desktop'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+
+    //https://github.com/jfoenixadmin/JFoenix
+    compile 'com.jfoenix:jfoenix:9.0.8'
+}
+javafx {
+    version = "13"
+    modules = [ 'javafx.controls', 'javafx.fxml', 'javafx.graphics', 'javafx.swing' ]
+}
+
+mainClassName = 'configuration.Main'
