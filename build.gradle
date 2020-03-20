@@ -18,6 +18,16 @@ dependencies {
 
     //https://github.com/jfoenixadmin/JFoenix
     compile 'com.jfoenix:jfoenix:9.0.8'
+
+    // https://mvnrepository.com/artifact/de.jensd/fontawesomefx-controls
+    compile group: 'de.jensd', name: 'fontawesomefx-controls', version: '9.1.2'
+    compile group: 'de.jensd', name: 'fontawesomefx-fontawesome', version: '4.7.0-9.1.2'
+    compile group: 'de.jensd', name: 'fontawesomefx-materialdesignfont', version: '2.0.26-9.1.2'
+    compile group: 'de.jensd', name: 'fontawesomefx-materialicons', version: '2.2.0-9.1.2'
+    compile group: 'de.jensd', name: 'fontawesomefx-weathericons', version: '2.0.10-9.1.2'
+
+
+    //soot  spoon
 }
 javafx {
     version = "13"
