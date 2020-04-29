@@ -86,7 +86,7 @@
                   <Insets />
                </VBox.margin>
             </HBox>
-            <HBox alignment="CENTER_LEFT" minWidth="35.0" styleClass="hover_border">
+            <HBox alignment="CENTER_LEFT" minWidth="35.0" onMouseClicked="#goToDashboard" styleClass="hover_border">
                <children>
                   <FontAwesomeIconView fill="#485460" glyphName="CIRCLE_ALT_NOTCH" size="1.5em" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: Quicksand; -fx-font-weight: bold; -fx-fill: #485460;" text="Dashboard">

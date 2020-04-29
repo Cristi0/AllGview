@@ -1,0 +1,16 @@
+
+]	java:S125""<This block of commented-out lines of code should be removed.(¶ÚöÂùÿÿÿÿ8Óà­½.
+I
+java:S1602 ",Remove useless curly braces around statement(—Õ¤Ö8øÒ®½.
+V
+java:S1128	"4Remove this unused import 'javafx.beans.Observable'.(æ ûÿÿÿÿ8ñŒÜ½.
+Z
+java:S1128"8Remove this unused import 'javafx.scene.control.Button'.(Ë Í‹øÿÿÿÿ8‰ßü¼.
+X
+java:S1128";Remove this unused import 'javafx.scene.layout.AnchorPane'.(Ø µ8¬„ ½.
+]	java:S125."<This block of commented-out lines of code should be removed.(¶ÚöÂùÿÿÿÿ8Ì­½.
+S
+java:S2696"6Make the enclosing method "static" or remove this set.(¤Äüƒ8åùª½.
+a
+java:S1128
+"?Remove this unused import 'javafx.collections.ObservableArray'.(Ä‹¸İüÿÿÿÿ8–éÜ½.

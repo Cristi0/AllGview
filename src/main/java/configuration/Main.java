@@ -25,29 +25,25 @@ public class Main extends Application {
 //        Scene scene = new Scene(new StackPane(l), 640, 480);
 //        primaryStage.setScene(scene);
 //        primaryStage.show();
-        String javaVersion = System.getProperty("java.version");
-        String javafxVersion = System.getProperty("javafx.version");
-        System.out.println("Hello, JavaFX " + javafxVersion + ", running on Java " + javaVersion + ".");
+//        String javafxVersion = System.getProperty("javafx.version");
+//        String javaVersion = System.getProperty("java.version");
+//        System.out.println("Hello, JavaFX " + javafxVersion + ", running on Java " + javaVersion + ".");
 
         primaryStage.setMinWidth(1024);
         primaryStage.setMinHeight(576);
         try {
-            System.out.println(getClass().getResource("/fxml/Main.fxml").getPath());
-            //Parent root = FXMLLoader.load(getClass().getResource("/fxml/Main.fxml"));
             FXMLLoader rootfxmlLoader = new FXMLLoader(getClass().getResource("/fxml/Main.fxml"));
             Parent root = rootfxmlLoader.load();
-            FXMLLoader subfxmlLoader = new FXMLLoader(getClass().getResource("/fxml/Dashboard.fxml"));
-            ((BorderPane)root).setCenter(subfxmlLoader.load());
 
-            DashboardController controller = subfxmlLoader.getController();
-            controller.setPrimaryStage(primaryStage);
-            controller.load();
+            MainController ctrl = rootfxmlLoader.getController();
+            ctrl.setPrimaryStage(primaryStage);
+            ctrl.load();
 
             Scene scene =new Scene(root,1024,576);
 
             primaryStage.setTitle("AllGview");
             primaryStage.setScene(scene);
-
+            ctrl.changeContent("Dashboard");
             primaryStage.show();
         } catch (IOException e) {
             e.printStackTrace();

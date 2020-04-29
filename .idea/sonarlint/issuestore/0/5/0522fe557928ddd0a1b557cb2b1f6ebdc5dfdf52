@@ -1,5 +1,11 @@
 
+]	java:S125"<This block of commented-out lines of code should be removed.(´³üÿÿÿÿ8¯ÕããŠ.
 E
-java:S1148%"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8‹ÇèãŠ.
-]	java:S125"<This block of commented-out lines of code should be removed.(´³üÿÿÿÿ8¯ÕããŠ.
-Z	java:S106"9Replace this use of System.out or System.err by a logger.(áµ„ùÿÿÿÿ8µÛƒùŠ.
+java:S11481"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8‹ÇèãŠ.
+Y
+java:S1128"7Remove this unused import 'controller.GraphController'.(ù—·ÿûÿÿÿÿ8¼«‡Â.
+X
+java:S1128";Remove this unused import 'controller.DashboardController'.(®ÕÎÙ8°¤ßÃ.
+]
+java:S1128
+";Remove this unused import 'javafx.scene.layout.BorderPane'.(Îî¥üÿÿÿÿ8ıøßÃ.

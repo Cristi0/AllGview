@@ -1,0 +1,16 @@
+.icon-button {
+	-fx-alignment: center-left;
+    -icon-paint: aaaa;
+    -fx-background-color: -icon-paint;
+    -size: 20;
+    -fx-min-height: -size;
+    -fx-min-width: -size;
+    -fx-max-height: -size;
+    -fx-max-width: -size;
+
+  /*  -fx-shape: "M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z";*/
+}
+
+.icon-button:hover {
+    -icon-paint: linear-gradient(to bottom, aa0f, black);
+}

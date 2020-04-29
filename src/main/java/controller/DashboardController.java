@@ -17,7 +17,6 @@ public class DashboardController extends Controller {
 
     public void createNewProject(ActionEvent actionEvent) {
         try {
-
             changeContent("Work");
         } catch (IOException e) {
             e.printStackTrace();

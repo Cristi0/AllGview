@@ -38,3 +38,15 @@ U
 ,src/main/java/controller/MainController.java,9\6\96bec464186c8eef9996b446bee0fd1577d99999
 [
 +src/main/java/configuration/Animations.java,3\d\3d9e7d78ffbe2289e2c6fa6a55307a4d4f2bdc0c
+P
+ src/main/resources/css/style.css,a\a\aaa3c690310c5fcc0e7172e8e57664b5291ae9d3
+V
+&src/main/resources/fxml/Dashboard.fxml,a\2\a2b7c597c42ad082df7ed93d2bb979612e992a16
+a
+1src/main/java/controller/DashboardController.java,5\7\57b6d01234c1bde24f392bfb8c59b6a94923f180
+X
+(src/main/java/controller/Controller.java,0\5\05fd466bff28423ca702e1a116df355b44712db1
+]
+-src/main/java/controller/GraphController.java,c\b\cb31729433b8e6ea6049714da9e3eab000dc8a79
+Z
+*src/main/java/Controlls/MouseGestures.java,1\e\1ed89191ad454e32f1ccbcc40a7ad1b543ddb0db

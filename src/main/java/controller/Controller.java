@@ -14,9 +14,10 @@ public abstract class Controller implements Initializable {
     }
     public abstract void load();
 
-    protected void changeContent(String fxmlFileName) throws IOException {
+    public void changeContent(String fxmlFileName) throws IOException {
         FXMLLoader subfxmlLoader = new FXMLLoader(getClass().getResource("/fxml/"+fxmlFileName+".fxml"));
-        ((BorderPane)primaryStage.getScene().rootProperty().get()).setCenter(subfxmlLoader.load());
+        BorderPane borderPane =((BorderPane)primaryStage.getScene().rootProperty().get());
+        borderPane.setCenter(subfxmlLoader.load());
         Controller ctrl = subfxmlLoader.getController();
         ctrl.setPrimaryStage(primaryStage);
         ctrl.load();

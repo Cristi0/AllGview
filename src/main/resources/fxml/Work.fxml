@@ -15,7 +15,7 @@
                <tabs>
                   <Tab text="Untitled Tab 1">
                      <content>
-                        <AnchorPane fx:id="currentpane" onMouseClicked="#drawCircle" style="-fx-background-color: white;" BorderPane.alignment="CENTER" />
+                        <AnchorPane fx:id="currentpane" onMouseClicked="#draw" style="-fx-background-color: white;" BorderPane.alignment="CENTER" />
                      </content>
                   </Tab>
                   <Tab text="Untitled Tab 2">
