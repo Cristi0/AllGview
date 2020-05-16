@@ -1,4 +1,4 @@
-package Controlls;
+package UI.Controlls;
 
 import javafx.event.EventHandler;
 import javafx.scene.Node;

@@ -1,7 +1,6 @@
-package controller;
+package UI.controller;
 
 import javafx.event.ActionEvent;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;

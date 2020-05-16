@@ -26,7 +26,7 @@ dependencies {
     compile group: 'de.jensd', name: 'fontawesomefx-materialicons', version: '2.2.0-9.1.2'
     compile group: 'de.jensd', name: 'fontawesomefx-weathericons', version: '2.0.10-9.1.2'
 
-
+//https://github.com/OpenHFT/Java-Runtime-Compiler
     //soot  spoon
 }
 javafx {
@@ -34,4 +34,4 @@ javafx {
     modules = [ 'javafx.controls', 'javafx.fxml', 'javafx.graphics', 'javafx.swing' ]
 }
 
-mainClassName = 'configuration.Main'
+mainClassName = 'UI.configuration.Main'
