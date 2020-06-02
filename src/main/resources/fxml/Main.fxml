@@ -2,23 +2,21 @@
 
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
 <BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="1024.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.controller.MainController">
-   <bottom>
-      <AnchorPane minHeight="30.0" style="-fx-background-color: grey;" BorderPane.alignment="CENTER" />
-   </bottom>
    <top>
       <HBox BorderPane.alignment="CENTER">
          <children>
-            <HBox alignment="CENTER" maxWidth="-Infinity" prefWidth="150.0" style="-fx-background-color: #0fbcf9;">
+            <HBox alignment="CENTER" maxWidth="-Infinity" onMouseClicked="#service" prefWidth="150.0" style="-fx-background-color: #0fbcf9;">
                <children>
                   <FontAwesomeIconView fill="WHITE" glyphName="LASTFM" size="2.4em" styleClass="cursor_hand" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: Quicksand; -fx-font-weight: bolder; -fx-fill: white;" text="AllGview">
@@ -212,4 +210,20 @@
          </children>
       </VBox>
    </left>
+   <bottom>
+      <HBox alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="1024.0" style="-fx-background-color: grey;" BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="TextStatus" text="Label">
+               <HBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </HBox.margin>
+            </Label>
+            <ProgressBar fx:id="ProgressBar" prefWidth="100.0" progress="0.0" style="-fx-progress-color: grey; -fx-blend-mode: red;">
+               <HBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </HBox.margin>
+            </ProgressBar>
+         </children>
+      </HBox>
+   </bottom>
 </BorderPane>

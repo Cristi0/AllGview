@@ -1,10 +1,17 @@
 package UI.controller;
 
+import Service.MainService;
 import UI.configuration.Animations;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
+import javafx.scene.effect.BlendMode;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 
 import java.io.IOException;
 import java.net.URL;
@@ -15,7 +22,10 @@ import java.util.ResourceBundle;
 public class MainController extends Controller {
     public FontAwesomeIconView menu_opener;
     public VBox left_panel;
-   // public Button menu_opener;
+
+    public Label TextStatus;
+    public ProgressBar ProgressBar;
+    // public Button menu_opener;
    // public AnchorPane left_panel;
     private Animations animation = new Animations();
 
@@ -26,6 +36,8 @@ public class MainController extends Controller {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        ProgressBar.setVisible(false);
+        TextStatus.setText("");
     }
 
     public void open_close(MouseEvent mouseEvent) {
@@ -44,5 +56,9 @@ public class MainController extends Controller {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void service(MouseEvent mouseEvent) {
+        System.out.println("Easter egg!");
     }
 }

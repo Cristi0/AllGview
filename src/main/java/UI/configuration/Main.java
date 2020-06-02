@@ -1,5 +1,6 @@
 package UI.configuration;
 
+import UI.Alert.Dialog;
 import UI.controller.MainController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -42,6 +43,7 @@ public class Main extends Application {
             primaryStage.setScene(scene);
             ctrl.changeContent("Dashboard");
             primaryStage.show();
+           //todo: de sters Dialog.error("Measj");
         } catch (IOException e) {
             e.printStackTrace();
         }

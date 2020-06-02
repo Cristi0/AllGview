@@ -1,0 +1,15 @@
+.buttonStyle{
+    -fx-background-color: #0fbcf9;
+    -fx-background-radius: 0px;
+    -fx-text-fill: white;
+    -fx-font-family: Quicksand;
+    -fx-font-weight: bold;
+}
+
+.buttonStyle:hover{
+    -fx-background-color: rgb(24, 90, 219);
+}
+.buttonStyle:pressed {
+    -fx-background-color:
+            radial-gradient(center 50% 50%, radius 100%, #0fbcf9, rgb(16, 67, 167));
+}

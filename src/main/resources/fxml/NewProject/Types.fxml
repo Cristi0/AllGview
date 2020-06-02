@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<TilePane minHeight="200.0" minWidth="200.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.controller.NewProject.Content">
+   <children>
+      <VBox id="1" fx:id="item1" alignment="CENTER" onMouseClicked="#selected" prefHeight="100.0" prefWidth="200.0" styleClass="selected-item-border" stylesheets="@../../css/Theme/white-blue.css">
+         <children>
+            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../img/ProjectType/vector-Graph-white.png" />
+               </image>
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
+            </ImageView>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Graph">
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </Text>
+         </children>
+         <TilePane.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </TilePane.margin>
+      </VBox>
+   </children>
+</TilePane>

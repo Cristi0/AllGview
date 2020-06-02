@@ -46,7 +46,7 @@
                   <FontAwesomeIconView glyphName="SEARCH" selectionFill="#485460" size="1.5em" styleClass="cursor_hand" />
                </children>
             </HBox>
-            <Button mnemonicParsing="false" onAction="#createNewProject" prefHeight="35.0" prefWidth="123.0" style="-fx-background-color: #0fbcf9; -fx-background-radius: 0px; -fx-text-fill: white; -fx-font-family: Quicksand; -fx-font-weight: bold;" text="Create new project">
+            <Button mnemonicParsing="false" onAction="#createNewProject" prefHeight="35.0" prefWidth="123.0" styleClass="buttonStyle" stylesheets="@../css/button.css" text="Create new project">
                <HBox.margin>
                   <Insets left="20.0" />
                </HBox.margin>
