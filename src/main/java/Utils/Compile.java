@@ -3,7 +3,6 @@ package Utils;
 import Eroare.CompileException;
 import Service.MainService;
 import javafx.beans.property.SimpleFloatProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 
 import javax.tools.*;
 import java.io.File;
@@ -30,9 +29,15 @@ public class Compile {
     private static Path javaSourceFile;
     private final static Path temp = Paths.get(System.getProperty("java.io.tmpdir"), className);
 
+    public static ArrayList<Integer> nodes = new ArrayList<>();
+    public static ArrayList<ArrayList<Integer>> edges = new ArrayList<>();
+
     public static List<Integer> runCode(String code) throws CompileException {
         Object rez = null;
         try {
+            validate(code);
+            code=addDependences(code);
+            System.out.println(code);
             saveInTemp(code);
             CompileProgress++;
             CompileProgressProperty.setValue(CompileProgress);
@@ -53,25 +58,19 @@ public class Compile {
         return list;
     }
 
+    private static void validate(String code) {
+    }
+
+    private static String addDependences(String code) {
+        code=code.replaceFirst("nodes[ ]*=[ ]*null","nodes=Utils.Compile.nodes");
+        return code.replaceFirst("edges[ ]*=[ ]*null","edges=Utils.Compile.edges");
+    }
+
     private static void saveInTemp(String code) throws IOException {
         Files.createDirectories(temp);
         javaSourceFile = Paths.get(temp.normalize().toAbsolutePath().toString(), className + ".java");
         System.out.println("The java source file is loacted at " + javaSourceFile);
-//        String code = "import java.util.ArrayList;" +
-//                "import Service.MainService;" +
-//                "public class " + className + " {" +
-//                "public static int abc(){" +
-//                "return 231;}" +
-//                "public static ArrayList<Integer> run() {\n" +
-//                "       ArrayList<Integer> a =new ArrayList<>();" +
-//                "       a.add(1);" +
-//                "       a.add(2);" +
-//                "a.add(abc());" +
-//                " MainService s =new MainService();\n" +
-//                " a.add(s.srv());" +
-//                "       return a;\n" +
-//                "    }" +
-//                "}";
+
         Files.write(javaSourceFile, code.getBytes());
     }
 
@@ -108,7 +107,7 @@ public class Compile {
         task.call();
         // Printing of any compile problems
         for (Diagnostic diagnostic : diagnostics.getDiagnostics()) {
-            System.out.format("Error on line %d in %s%n",
+            System.err.format("Error on line %d in %s%n",
                     diagnostic.getLineNumber(),
                     diagnostic.getSource());
         }
@@ -126,5 +125,31 @@ public class Compile {
         Object obj = new Object();
         Object ret = method.invoke(obj);
         return ret;
+    }
+
+    public static class Pair {
+        private Integer node1;
+        private Integer node2;
+
+        public Pair(Integer first, Integer second) {
+            this.node1 = first;
+            this.node2 = second;
+        }
+
+        public Integer getFirst() {
+            return node1;
+        }
+
+        public void setFirst(Integer first) {
+            this.node1 = node1;
+        }
+
+        public Integer getSecond() {
+            return node2;
+        }
+
+        public void setSecond(Integer second) {
+            this.node2 = node2;
+        }
     }
 }

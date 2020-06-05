@@ -24,7 +24,7 @@ public class DashboardController extends Controller {
 
     public void createNewProject(ActionEvent actionEvent) throws IOException {  //todo: Deal with exception
 //        try {
-//            createProjectFromData(1,2);
+//            createProjectFromData(1,3);
 //        } catch (UnexpectedException e) {
 //            e.printStackTrace();
 //        }
@@ -38,7 +38,7 @@ public class DashboardController extends Controller {
 
         // New window (Stage)
         Stage newWindow = new Stage();
-        newWindow.setTitle("Second Stage");
+        newWindow.setTitle("Create new project");
         newWindow.setScene(secondScene);
         newWindow.setMinWidth(600);
         newWindow.setMinHeight(400);

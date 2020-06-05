@@ -55,7 +55,7 @@
                               <Insets right="10.0" />
                            </HBox.margin>
                         </Text>
-                        <FontAwesomeIconView glyphName="ANGLE_DOWN" size="1.5em" styleClass="cursor_hand">
+                        <FontAwesomeIconView fx:id="menuUserOpener" glyphName="ANGLE_DOWN" onMouseClicked="#showUserMenu" size="1.5em" styleClass="cursor_hand">
                            <HBox.margin>
                               <Insets right="10.0" />
                            </HBox.margin>
