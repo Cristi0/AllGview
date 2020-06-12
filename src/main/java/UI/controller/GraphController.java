@@ -48,6 +48,8 @@ public class GraphController extends Controller {
 
 
     public Button StartAnimation;
+    public Button SaveAsButton;
+    public Button LoadFromButton;
 
     private List<Integer> order;
 
@@ -87,8 +89,17 @@ public class GraphController extends Controller {
         StartAnimation.setDisable(true);
     }
 
+    private void hintButton(Button button, String text){
+        button.setOnMouseEntered((event)->{
+            MainController.Hint.setText("Hint: "+text);
+        });
+        button.setOnMouseExited(event -> {
+            MainController.Hint.setText(MainController.HintString);
+        });
+    }
     /**
      * Initializeaza datele si seteaza meniurile pentru zonele din aplicatie
+     *
      * @param location
      * @param resources
      */
@@ -97,6 +108,12 @@ public class GraphController extends Controller {
         clearData();
 
         SpeedValue.textProperty().bind(SpeedIndicator.valueProperty().divide(20).asString("%.2f"));
+
+        hintButton(StartAnimation,"View the vizual result of the code execution at the set speed.");
+        hintButton(SaveAsButton,"Save all code, nodes, connections and weights in a local file.");
+        hintButton(LoadFromButton,"Load code, nodes, connections and weights from a local file.");
+
+
 
         Platform.runLater(() -> {
 
@@ -113,14 +130,36 @@ public class GraphController extends Controller {
 
             execute.setOnAction((event) -> {
                 executeCode();
-
             });
 
-            menu.getItems().add(menu.getItems().size() - 2, execute);
+            menu.addEventHandler(MouseEvent.MOUSE_ENTERED_TARGET, e -> {
+                Menu.getHintsForDefaultMenuItems(e.getY());
+                if (185 < e.getY() && e.getY() < 211) {
+                    Platform.runLater(() -> {
+                        MainController.Hint.setText("Hint: Execute source code. If it has compile errors those will be shown in \"Console\".");
+                    });
+                }
+            });
+            menu.addEventHandler(MouseEvent.MOUSE_EXITED_TARGET, e -> {
+                MainController.Hint.setText(MainController.HintString);
+            });
             menu.getItems().add(execute);
             codeArea.setContextMenu(menu);
 
-            //^^^ todo: de facut validare pt codul sursa + separare pe functii
+
+
+            ContextMenu menu1 = new ContextMenu();      //codeAreaMenu
+            menu1.getItems().addAll(Menu.createDefaultMenuItems(Console));
+
+            menu1.addEventHandler(MouseEvent.MOUSE_ENTERED_TARGET, e -> {
+                Menu.getHintsForDefaultMenuItems(e.getY());
+            });
+            menu1.addEventHandler(MouseEvent.MOUSE_EXITED_TARGET, e -> {
+                MainController.Hint.setText(MainController.HintString);
+            });
+            Console.setContextMenu(menu1);
+
+
             showMenu();
 
         });
@@ -179,8 +218,8 @@ public class GraphController extends Controller {
 
             futureCompile = CompletableFuture.supplyAsync(() -> {
                 try {
-                    List<Integer> l=Compile.runCode(codeArea.getText());
-                    Console.setText(Compile.getWarnings()+"\nSucces");
+                    List<Integer> l = Compile.runCode(codeArea.getText());
+                    Console.setText(Compile.getWarnings() + "\nSucces");
                     return l;
                 } catch (CompileException e) {
                     Console.setText(e.getMessage());
@@ -200,6 +239,7 @@ public class GraphController extends Controller {
 
     /**
      * Deseneaza noduri la pozitia mouse-ului
+     *
      * @param mouseEvent clickul pe un pane al unui mouse
      */
     public void draw(MouseEvent mouseEvent) {   //todo: de facut o validare prin care daca se face aceeasi linie atunci sa nu se repete in lista
@@ -210,8 +250,9 @@ public class GraphController extends Controller {
 
     /**
      * Deseneaza nodurile la pozitiile x si y intr-un pane
-     * @param pozX pozitie pe orizontala
-     * @param pozY pozitia pe verticala
+     *
+     * @param pozX   pozitie pe orizontala
+     * @param pozY   pozitia pe verticala
      * @param Source Pane
      */
     private void drawCircles(double pozX, double pozY, Object Source) {
@@ -233,7 +274,8 @@ public class GraphController extends Controller {
      * In cazul unui clcik pe nod se va alege actiunea necesara in functie de optiuniule alese
      * Daca isDelete este true atunci se va sterege nodul
      * Altfel se va crea un nod nou
-     * @param event clickul care a provocat acest eveniment
+     *
+     * @param event      clickul care a provocat acest eveniment
      * @param thisCircle nodul pentru care se executa actiunea
      */
     private void setCircleEvent(MouseEvent event, StackPane thisCircle) {
@@ -248,41 +290,61 @@ public class GraphController extends Controller {
     /**
      * Sterge nodul curent.
      * Daca nodul are conexiuni cu alte noduri, acestea vor fi sterse
+     *
      * @param node nodul ce urmeaza a fi sters
      */
     private void deleteNodeAction(StackPane node) {
         drawable.remove(node);      //remove from list
-        lines.removeIf(x -> {       // remove all lines that were connected to this node
-            String[] s = x.getId().split(",");
-            Integer node1 = Integer.valueOf(s[0]);
-            Integer node2 = Integer.valueOf(s[1]);
-            if (node1.equals(Integer.valueOf(node.getId())) || node2.equals(Integer.valueOf(node.getId()))) {
-                Platform.runLater(() -> {
-                    currentpane.getChildren().remove(x);
-                });
-                return true;
-            }
-            return false;
-        });
+        removeAllLinesAndWeightForNode(node);
         Platform.runLater(() -> {       //remove visualy node and all connected lines to it
             StartAnimation.setDisable(true);
             for (int i = Integer.valueOf(node.getId()); i < drawable.size(); i++) {
                 drawable.get(i).setId(String.valueOf(i));
                 ((Text) ((StackPane) drawable.get(i)).getChildren().get(1)).setText(String.valueOf(i + 1));
                 int finalI = i;
-                lines.stream().parallel().forEach(x -> x.setId(x.getId().replace(String.valueOf(finalI + 1), String.valueOf(finalI))));
+                lines.stream().forEach(x -> x.setId(x.getId().replace(String.valueOf(finalI + 1), String.valueOf(finalI))));
             }
             currentpane.getChildren().remove(node);
         });
     }
 
+
+    /**
+     * Sterge toate liniile asociate unui nod si ponderile asociate acestor linii
+     *
+     * @param node, nodul
+     */
+    private void removeAllLinesAndWeightForNode(Node node) {
+        for (int i = lines.size() - 1; i >= 0; i--) {
+            String[] s = lines.get(i).getId().split(",");
+            Integer node1 = Integer.valueOf(s[0]);
+            Integer node2 = Integer.valueOf(s[1]);
+            if (node1.equals(Integer.valueOf(node.getId())) || node2.equals(Integer.valueOf(node.getId()))) {
+                if (weight.size() > i) {
+                    Node n = GraphController.weight.remove(i);
+                    if (hasWeight.getValue()) {
+                        Platform.runLater(() -> {
+                            currentpane.getChildren().remove(n);
+                        });
+                    }
+                }
+                Node lineNode = lines.get(i);
+                lines.remove(i);
+                Platform.runLater(() -> {
+                    currentpane.getChildren().remove(lineNode);
+                });
+            }
+        }
+    }
+
     /**
      * Deseneaz o linie care trece de la un nod la pozitia mouse-ului.
      * Daca a fost deja selecta un nod inainte actunci sfarsitul liniei va fa la nodul curent.
-     * @param Source Stackpane-ul de la care se deseneaza linia
-     * @param button tipul de buton, de la mouse, apasat
+     *
+     * @param Source      Stackpane-ul de la care se deseneaza linia
+     * @param button      tipul de buton, de la mouse, apasat
      * @param whereToDraw Pane, locatia unde se va desena
-     * @param idSource id-ul nodului sursa
+     * @param idSource    id-ul nodului sursa
      */
     private void drawLines(Object Source, MouseButton button, Object whereToDraw, String idSource) {
         if ((isLine.getValue() || isLineConnected) && button == MouseButton.PRIMARY) {
@@ -308,7 +370,16 @@ public class GraphController extends Controller {
                             StartAnimation.setDisable(true);
                         });
                         Shape node = (Shape) ev.getSource();
+                        int idx = lines.indexOf(node);
                         lines.remove(node);
+                        if (weight.size() > idx) {
+                            Node weight = GraphController.weight.remove(idx);
+                            if (hasWeight.getValue()) {
+                                Platform.runLater(() -> {
+                                    currentpane.getChildren().remove(weight);
+                                });
+                            }
+                        }
                         Platform.runLater(() -> {
                             currentpane.getChildren().remove(node);
                         });
@@ -317,7 +388,7 @@ public class GraphController extends Controller {
                 });
             } else {
                 shape = (Shape) lines.get(lines.size() - 1);
-                shape.setId(shape.getId() + "," +idSource);
+                shape.setId(shape.getId() + "," + idSource);
                 isLineConnected = false;
             }
         }
@@ -326,6 +397,7 @@ public class GraphController extends Controller {
 
     /**
      * Deseneaza un nod, avand proprietatea de a se putea misca dand click pe el, tinand apasat si miscand mouse-ul
+     *
      * @param x pozitia pe verticala pentru crearea nodului
      * @param y pozitia pe orizontala
      * @return nodul creat
@@ -347,6 +419,33 @@ public class GraphController extends Controller {
         CheckMenuItem delete = new CheckMenuItem("Delete");
         CheckMenuItem weight = new CheckMenuItem("Show Weights");
 
+        contextMenu.addEventHandler(MouseEvent.MOUSE_ENTERED_TARGET, e -> {
+            if (0 < e.getY() && e.getY() < 33) {
+                Platform.runLater(() -> {
+                    MainController.Hint.setText("Hint: Create new nodes on click. Press it again to stop it.");
+                });
+            }
+            if (32 < e.getY() && e.getY() < 60) {
+                Platform.runLater(() -> {
+                    MainController.Hint.setText("Hint: Create new connections between nodes when clicked on node. To finish line click on another node. Press it again to stop it.");
+                });
+            }
+            if (60 < e.getY() && e.getY() < 88) {
+                Platform.runLater(() -> {
+                    MainController.Hint.setText("Hint: Delete nodes or connections when clicked on them. Press it again to stop it. Note: When you delete a node, all his connections are also deleted. ");
+                });
+            }
+            if (87 < e.getY() && e.getY() < 120) {
+                Platform.runLater(() -> {
+                    MainController.Hint.setText("Hint: Show weights on connections. Press again to hide them.");
+                });
+            }
+        });
+        contextMenu.addEventHandler(MouseEvent.MOUSE_EXITED_TARGET, e -> {
+            Platform.runLater(() -> {
+                MainController.Hint.setText(MainController.HintString);
+            });
+        });
         contextMenu.getItems().addAll(circle, line, new SeparatorMenuItem(), delete, new SeparatorMenuItem(), weight);
         circle.setOnAction(event -> {
             isCircle.setValue(!isCircle.getValue());
@@ -424,6 +523,7 @@ public class GraphController extends Controller {
 
     /**
      * Setarea sablonului
+     *
      * @param template
      */
     public void setTemplate(Integer template) {
@@ -435,6 +535,7 @@ public class GraphController extends Controller {
     /**
      * Pornirea animatiei de parcurgere a nodorilor
      * In caz de apelare multipla se opreste ultimul apel
+     *
      * @param event
      */
     public void startAnimation(ActionEvent event) {
@@ -473,6 +574,7 @@ public class GraphController extends Controller {
     /**
      * Salveaza in fisier datele despre locatia nodurilo, conexiunile intre noduri, ponderile daca exista si a codului sursa.
      * Se deschide fileManagaer al sistemului de operarea.
+     *
      * @param event
      */
     public void SaveFile(ActionEvent event) {
@@ -488,7 +590,7 @@ public class GraphController extends Controller {
         if (file != null) {
             new Thread(() -> {
                 List nodes = drawable.stream().map(x -> new Pair(x.getTranslateX(), x.getTranslateY())).collect(Collectors.toList());
-                srv.saveLocalFile(nodes, transformLine(), weight.stream().map(x->Double.valueOf(((Text)x).getText())).collect(Collectors.toList()), codeArea.getText(), file);
+                srv.saveLocalFile(nodes, transformLine(), weight.stream().map(x -> Double.valueOf(((Text) x).getText())).collect(Collectors.toList()), codeArea.getText(), file);
             }).start();
 
         }
@@ -497,6 +599,7 @@ public class GraphController extends Controller {
     /**
      * Incarca din fisier datele despre locatia nodurilo, conexiunile intre noduri, ponderile daca exista si a codului sursa.
      * Se deschide fileManagaer al sistemului de operarea.
+     *
      * @param event
      */
     public void LoadFile(ActionEvent event) {
@@ -539,13 +642,13 @@ public class GraphController extends Controller {
                     drawLines(source, MouseButton.PRIMARY, currentpane, source.getId());
                     drawLines(stack, MouseButton.PRIMARY, currentpane, stack.getId());
                 }
-               // Platform.runLater();
+                // Platform.runLater();
                 ((List<Double>) data[2]).size();
                 for (int i = 0; i < ((List<Double>) data[2]).size(); i++) {
                     Text t = new Weight().createWeight((Line) lines.get(i), currentpane);
-                    t.setText(String.valueOf(((List<Double>)data[2]).get(i)));
+                    t.setText(String.valueOf(((List<Double>) data[2]).get(i)));
                     GraphController.weight.add(t);
-                   // System.out.println(GraphController.weight);
+                    // System.out.println(GraphController.weight);
                 }
 
                 isLine.setValue(false);
@@ -556,6 +659,7 @@ public class GraphController extends Controller {
 
     /**
      * Transorma din Linii in lista de conexiuni intre noduri
+     *
      * @return lista cu conexiunilr intre noduri
      */
     private List<Pair<Integer, Integer>> transformLine() {

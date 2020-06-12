@@ -23,13 +23,12 @@ public class GraphTemplateCode {
             case 4:
                 return dfs();
             case 5:
-                break;
+                return dijkstra();
             case 6:
-                break;
+                return bellmanFord();
             default:
                 throw new UnexpectedException("Template not found in db");
         }
-        return null;
     }
 
     /**
@@ -60,7 +59,7 @@ public class GraphTemplateCode {
     }
 
     /**
-     * Returneaza codul necesar pentru sablonul care contine alboritmul breath first search (BFS)
+     * Returneaza codul necesar pentru sablonul care contine algoritmul breath first search (BFS)
      * @return codul necesar
      */
     private static String bfs() {
@@ -107,7 +106,7 @@ public class GraphTemplateCode {
     }
 
     /**
-     * Returneaza codul necesar pentru sablonul care contine alboritmul depth first search (DFS)
+     * Returneaza codul necesar pentru sablonul care contine algoritmul depth first search (DFS)
      * @return codul necesar
      */
     private static String dfs() {
@@ -150,6 +149,104 @@ public class GraphTemplateCode {
                 "            queue.add(edges.get(i).get(edgeSide));\n" +
                 "        }\n" +
                 "    }\n" +
+                "}";
+    }
+    /**
+     * Returneaza codul necesar pentru sablonul care contine algoritmul lui Dijkstra
+     * @return codul necesar
+     */
+    private static String dijkstra(){
+        return "import java.util.*;\n" +
+                "\n" +
+                "public class javademo {\n" +
+                "\n" +
+                "    private static ArrayList<Integer> nodes = null;\n" +
+                "    private static ArrayList<ArrayList<Integer>> edges = null;\n" +
+                "    private static ArrayList<Double> weights = null;\n" +
+                "\n" +
+                "    public static ArrayList<Integer> run() {\n" +
+                "        ArrayList<Integer> result = new ArrayList<>();\n" +
+                "        Integer startNode = 0;\n" +
+                "\n" +
+                "        List<Boolean> visited = new ArrayList<>(Collections.nCopies(nodes.size(), false));\n" +
+                "        List<Double> distances = new ArrayList<>(Collections.nCopies(nodes.size(), Double.MAX_VALUE));\n" +
+                "\n" +
+                "        distances.set(startNode, 0.0);\n" +
+                "        result.add(startNode);\n" +
+                "\n" +
+                "        for (int count = 0; count < nodes.size() - 1; count++) {\n" +
+                "            int u = minDistance(distances, visited);\n" +
+                "            visited.set(u, true);\n" +
+                "\n" +
+                "            for (int i = 0; i < edges.size(); i++) {\n" +
+                "                int neighbour = -1;\n" +
+                "                if (edges.get(i).get(0).equals(u)) {\n" +
+                "                    neighbour = edges.get(i).get(1);\n" +
+                "                }\n" +
+                "                if (edges.get(i).get(1).equals(u)) {\n" +
+                "                    neighbour = edges.get(i).get(0);\n" +
+                "                }\n" +
+                "                if (neighbour != -1 &&\n" +
+                "                        !visited.get(neighbour) &&\n" +
+                "                        distances.get(u) != Double.MAX_VALUE\n" +
+                "                        && distances.get(u) + weights.get(i) < distances.get(neighbour)) {\n" +
+                "                    result.add(neighbour);\n" +
+                "                    distances.set(neighbour, distances.get(u) + weights.get(i));\n" +
+                "                }\n" +
+                "            }\n" +
+                "\n" +
+                "        }\n" +
+                "        return result;\n" +
+                "    }\n" +
+                "\n" +
+                "\n" +
+                "    private static int minDistance(List<Double> distances, List<Boolean> visited) {\n" +
+                "        double min = Integer.MAX_VALUE;\n" +
+                "        int minIndex = -1;\n" +
+                "\n" +
+                "        for (int v = 0; v < nodes.size(); v++) {\n" +
+                "            if (!visited.get(v) && distances.get(v) <= min) {\n" +
+                "                min = distances.get(v);\n" +
+                "                minIndex = v;\n" +
+                "            }\n" +
+                "        }\n" +
+                "        return minIndex;\n" +
+                "    }";
+    }
+    /**
+     * Returneaza codul necesar pentru sablonul care contine algoritmul lui Bellman Ford
+     * @return codul necesar
+     */
+    private static String bellmanFord() {
+        return "import java.util.*;\n" +
+                "\n" +
+                "public class javademo {\n" +
+                "\n" +
+                "    private static ArrayList<Integer> nodes = new ArrayList<>();\n" +
+                "    private static ArrayList<ArrayList<Integer>> edges = new ArrayList<>();\n" +
+                "    private static ArrayList<Double> weights = new ArrayList<>();\n" +
+                "\n" +
+                "    public static ArrayList<Integer> run() {\n" +
+                "        ArrayList<Integer> result = new ArrayList<>();\n" +
+                "        Integer startNode = 0;\n" +
+                "\n" +
+                "        List<Double> distances = new ArrayList<>(Collections.nCopies(nodes.size(), Double.MAX_VALUE));\n" +
+                "        distances.set(startNode, 0.0);\n" +
+                "        result.add(startNode);\n" +
+                "\n" +
+                "        for (int i = 1; i < nodes.size(); ++i) {\n" +
+                "            for (int j = 0; j < edges.size(); ++j) {\n" +
+                "                int u = edges.get(j).get(0);\n" +
+                "                int v = edges.get(j).get(1);\n" +
+                "                double weight = weights.get(j);\n" +
+                "                if (distances.get(u) != Double.MAX_VALUE && distances.get(u) + weight < distances.get(v)) {\n" +
+                "                    distances.set(v, distances.get(u) + weight);\n" +
+                "                    result.add(v);\n" +
+                "                }\n" +
+                "            }\n" +
+                "        }\n" +
+                "       return result;\n" +
+                "   }\n" +
                 "}";
     }
 }

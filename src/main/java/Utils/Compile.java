@@ -62,6 +62,7 @@ public class Compile {
             CompileProgressProperty.setValue(CompileProgress);
 
         } catch (IOException | IllegalAccessException | ClassNotFoundException | NoSuchMethodException | InvocationTargetException e) {
+            System.out.println(e.getStackTrace());
             throw new CompileException(e.getMessage());
         }
         System.out.println(rez);

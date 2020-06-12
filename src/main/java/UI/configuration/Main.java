@@ -17,10 +17,15 @@ public class Main extends Application {
 
     /**
      * Pornirea programului principal
+     *
      * @param primaryStage scnea principala
      */
+
+    public static boolean hasHints = true;
+
     @Override
     public void start(Stage primaryStage) {
+
         primaryStage.setMinWidth(1024);
         primaryStage.setMinHeight(576);
         try {
@@ -31,7 +36,7 @@ public class Main extends Application {
             ctrl.setPrimaryStage(primaryStage);
             ctrl.load();
 
-            Scene scene =new Scene(root,1024,576);
+            Scene scene = new Scene(root, 1024, 576);
 
             primaryStage.setTitle("AllGview");
             primaryStage.setScene(scene);

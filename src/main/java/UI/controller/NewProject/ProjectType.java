@@ -3,6 +3,7 @@ package UI.controller.NewProject;
 import Eroare.UnexpectedException;
 import UI.controller.Controller;
 import UI.controller.DashboardController;
+import UI.controller.ProjectsController;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.geometry.Bounds;
@@ -62,7 +63,7 @@ public class ProjectType extends Controller {
                 NextButton.setDisable(true);
                 break;
             case 1:
-                DashboardController dc=(DashboardController) Creator;
+                ProjectsController dc=(ProjectsController) Creator;
                 dc.createProjectFromData(type,template);
                 primaryStage.close();
                 break;

@@ -111,7 +111,7 @@
                                              <children>
                                                 <HBox alignment="CENTER">
                                                    <children>
-                                                      <Button mnemonicParsing="false" onAction="#SaveFile" styleClass="buttonStyle" stylesheets="@../css/button.css" text="Save as">
+                                                      <Button fx:id="SaveAsButton" mnemonicParsing="false" onAction="#SaveFile" styleClass="buttonStyle" stylesheets="@../css/button.css" text="Save as">
                                                          <HBox.margin>
                                                             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                                          </HBox.margin>
@@ -120,7 +120,7 @@
                                                 </HBox>
                                                 <HBox alignment="CENTER">
                                                    <children>
-                                                      <Button mnemonicParsing="false" onAction="#LoadFile" styleClass="buttonStyle" stylesheets="@../css/button.css" text="Load from">
+                                                      <Button fx:id="LoadFromButton" mnemonicParsing="false" onAction="#LoadFile" styleClass="buttonStyle" stylesheets="@../css/button.css" text="Load from">
                                                          <HBox.margin>
                                                             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                                          </HBox.margin>

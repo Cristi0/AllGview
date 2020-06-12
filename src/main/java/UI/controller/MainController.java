@@ -17,6 +17,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
+import javafx.scene.text.Text;
 
 import java.io.IOException;
 import java.net.URL;
@@ -32,6 +33,10 @@ public class MainController extends Controller {
     public ProgressBar ProgressBar;
 
     public FontAwesomeIconView menuUserOpener;
+    public Label HintIndicator;
+
+    public static Label Hint =null;
+    public static final String HintString = "Hint: Hover on an object in order to tell what it can do.";
     // public Button menu_opener;
     // public AnchorPane left_panel;
     private Animations animation = new Animations();
@@ -45,6 +50,8 @@ public class MainController extends Controller {
     public void initialize(URL location, ResourceBundle resources) {
         ProgressBar.setVisible(false);
         TextStatus.setText("");
+        Hint=HintIndicator;
+        HintIndicator.setWrapText(true);
     }
 
     /**
@@ -101,6 +108,30 @@ public class MainController extends Controller {
         if (!cn.isShowing()) {
             cn.show(menuUserOpener, mouseEvent.getScreenX() - mouseEvent.getX()-cn.getWidth()+10, mouseEvent.getScreenY() - mouseEvent.getY()+10);
 
+        }
+    }
+
+    public void goToSettings(MouseEvent event) {
+        try {
+            changeContent("Settings");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void goToContactSupport(MouseEvent event) {
+        try {
+            changeContent("ContactInfo");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void goToProjects(MouseEvent event) {
+        try {
+            changeContent("Projects");
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
