@@ -10,6 +10,13 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Menu {
+
+    /**
+     * Returneaza un meniu default pentru editare de text.
+     * El contine: Undo, Redo, Cut, Copy, Paste, Delete, Select all
+     * @param t
+     * @return
+     */
     public static List<MenuItem> createDefaultMenuItems(TextInputControl t) {
         MenuItem undo = new MenuItem("Undo");
         undo.setOnAction(e -> t.undo());

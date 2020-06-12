@@ -23,6 +23,12 @@ public class StraightLine implements Line {
         this.parent = parent;
     }
 
+    /**
+     * Deseneaza o linie de la un nod (stackPane) la mouse.
+     * Daca se executa a doua oara, atunci ultima linie trasa de la nod se va sfarsi la noul nod dat (stakpane).
+     * @param stack, nodul sursa de inceput pentru primul apel si nodul de sfarsit pentru al doilea apel al functiei
+     * @return Linia dintr nod si mouse sau null daca este a doua iteratie
+     */
     @Override
     public Shape draw(StackPane stack) {
         if (previous == null) {

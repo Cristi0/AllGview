@@ -15,18 +15,12 @@ public class Main extends Application {
         launch(args);
     }
 
+    /**
+     * Pornirea programului principal
+     * @param primaryStage scnea principala
+     */
     @Override
     public void start(Stage primaryStage) {
-//        String javaVersion = System.getProperty("java.version");
-//        String javafxVersion = System.getProperty("javafx.version");
-//        Label l = new Label("Hello, JavaFX " + javafxVersion + ", running on Java " + javaVersion + ".");
-//        Scene scene = new Scene(new StackPane(l), 640, 480);
-//        primaryStage.setScene(scene);
-//        primaryStage.show();
-//        String javafxVersion = System.getProperty("javafx.version");
-//        String javaVersion = System.getProperty("java.version");
-//        System.out.println("Hello, JavaFX " + javafxVersion + ", running on Java " + javaVersion + ".");
-
         primaryStage.setMinWidth(1024);
         primaryStage.setMinHeight(576);
         try {
@@ -43,7 +37,6 @@ public class Main extends Application {
             primaryStage.setScene(scene);
             ctrl.changeContent("Dashboard");
             primaryStage.show();
-           //todo: de sters Dialog.error("Measj");
         } catch (IOException e) {
             e.printStackTrace();
         }

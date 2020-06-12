@@ -8,9 +8,9 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public abstract class Controller implements Initializable {
-    protected Stage primaryStage;
-    protected Controller Creator;
-    protected Controller Created;
+    protected Stage primaryStage;       // fereastra curenta
+    protected Controller Creator;       // Controllerul care a creat acest controller
+    protected Controller Created;       // Ultimul controller creat de acest controller
 
     public void setPrimaryStage(Stage primaryStage) {
         this.primaryStage = primaryStage;
@@ -22,6 +22,13 @@ public abstract class Controller implements Initializable {
 
     public abstract void load();
 
+    /**
+     * Schimba continutul unui fxml care are la baza: BorderPane, anume schimba centrul acestuia.
+     * Se seteaza controllerul care il creeaza pentru controllerul noului fxml creat
+     * Se seteaza pentru propriul controllor ultimul controller creat
+     * @param fxmlFileName
+     * @throws IOException
+     */
     public void changeContent(String fxmlFileName) throws IOException {
         FXMLLoader subfxmlLoader = new FXMLLoader(getClass().getResource("/fxml/" + fxmlFileName + ".fxml"));
         BorderPane borderPane = ((BorderPane) primaryStage.getScene().rootProperty().get());

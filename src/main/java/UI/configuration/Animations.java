@@ -18,6 +18,14 @@ import javafx.util.Duration;
 
 public class Animations {
     static boolean isCollapsed = false;
+
+    /**
+     * Inchide si deschide meniul, schimband iconita butonului
+     * @param pane Panoul care va fi deschis sau inchis
+     * @param icon Butonul caruia i se va modicia iconitia de la > la < sau invers
+     * @param openTo numraul de pixeli pentru a se vizualiza cand este deschis
+     * @param closeTo numarul de pixeli pentru a se vizualiza cand este inchis
+     */
     public void slideOpenOrClosePanel(VBox pane, FontAwesomeIconView icon, int openTo, int closeTo){
         isCollapsed=!isCollapsed;
         final Timeline timeline = new Timeline();
@@ -49,6 +57,12 @@ public class Animations {
         }
     }
 
+    /**
+     * Afiseaza informatiile despre butoane sau le ascunde
+     * @param list obiectele pentru care se vor ascunde sau afisa informatiile
+     * @param prefWidth dimensiunea, in numar de pixeli, aobiectelor cand se afiseaza sau se ascund
+     * @param visible true - se afiseaza; false - se ascund
+     */
     private void setTextVisible( ObservableList<Node> list, double prefWidth, boolean visible){
         for (int i = 1; i < list.size()-1; i++) {
             list.get(i).prefWidth(prefWidth);

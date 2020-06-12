@@ -47,6 +47,10 @@ public class MainController extends Controller {
         TextStatus.setText("");
     }
 
+    /**
+     * Deschide sau inchide meniul din lateral
+     * @param mouseEvent
+     */
     public void open_close(MouseEvent mouseEvent) {
         animation.slideOpenOrClosePanel(left_panel, menu_opener, 150, 40);
     }
@@ -57,6 +61,10 @@ public class MainController extends Controller {
     }
 
 
+    /**
+     * Modifica continului din centru aplicatie la dashboard.
+     * @param mouseEvent
+     */
     public void goToDashboard(MouseEvent mouseEvent) {
         try {
             changeContent("Dashboard");
@@ -71,6 +79,10 @@ public class MainController extends Controller {
 
     private ContextMenu cn;
 
+    /**
+     * Afiseaza meniul userului
+     * @param mouseEvent
+     */
     public void showUserMenu(MouseEvent mouseEvent) {
         if (cn == null) {
             MenuItem account = new MenuItem("Account");

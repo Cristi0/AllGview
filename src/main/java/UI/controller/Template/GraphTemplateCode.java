@@ -6,8 +6,14 @@ import Utils.Compile;
 
 public class GraphTemplateCode {
 
+    /**
+     * Selecteaza codul necesar pentru un sablon ales
+     * @param templateNumber, numarul sablonului
+     * @return String, codul sursa necesar
+     * @throws UnexpectedException, In cazul in care nu exista sablonul cerut
+     */
     public static String getBy(Integer templateNumber) throws UnexpectedException {
-        switch (templateNumber){
+        switch (templateNumber) {
             case 1:
                 return "";
             case 2:
@@ -26,55 +32,45 @@ public class GraphTemplateCode {
         return null;
     }
 
+    /**
+     * Returneaza codul necesar pentru sablonul de tip de baza
+     * @return codul necesar
+     */
     private static String basicCode() {
-//        return  "import java.util.ArrayList;\n" +
-//                "import Service.MainService;\n\n" +
-//                "public class " + Compile.className + " {\n\n" +
-//                "   public static int abc(){\n" +
-//                "       return 3;\n" +
-//                "   }\n\n" +
-//                "   public static ArrayList<Integer> run() {\n" +
-//                "       ArrayList<Integer> a =new ArrayList<>();\n" +
-//                "       a.add(1);\n" +
-//                "       a.add(2);\n" +
-//                "       a.add(abc());\n" +
-//                "       MainService s =new MainService();\n" +
-//                "      // a.add(s.srv());\n" +
-//                "       try {\n" +
-//                "            Thread.sleep(1000);\n" +
-//                "        } catch (InterruptedException e) {\n" +
-//                "            e.printStackTrace();\n" +
-//                "        }" +
-//                "       return a;\n" +
-//                "    }\n" +
-//                "}";
         return "import java.util.ArrayList;\n" +
                 "\n" +
                 "public class javademo {\n" +
                 "\n" +
-                "\tprivate final static ArrayList<Integer> nodes=null;\n" +
-                "\tprivate final static ArrayList<ArrayList<Integer>> edges=null;\n" +
+                "\tprivate final static ArrayList<Integer> nodes = null;\n" +
+                "\tprivate final static ArrayList<ArrayList<Integer>> edges = null;\n" +
+                "\tprivate final static ArrayList<Double> weights = null;\n" +
                 "\n" +
                 "\tpublic static ArrayList<Integer> run() {\n" +
                 "\t\tArrayList<Integer> result = new ArrayList<>(nodes);\n" +
                 "\t\tfor(int i=0;i<edges.size();i++){\n" +
                 "\t\t\tresult.add(edges.get(i).get(0));\n" +
                 "\t\t\tresult.add(edges.get(i).get(1));\n" +
-                "\t}\n" +
-                "\treturn result;\n" +
+                "\t\t}\n" +
+                "\t\tfor(int i=0;i<weights.size();i++){\n" +
+                "\t\t\tresult.add(weights.get(i).intValue());\n" +
+                "\t\t}" +
+                "\t\treturn result;\n" +
                 "\t}\n" +
                 "}";
     }
 
+    /**
+     * Returneaza codul necesar pentru sablonul care contine alboritmul breath first search (BFS)
+     * @return codul necesar
+     */
     private static String bfs() {
-        return "import Utils.Compile;\n" +
-                "\n" +
-                "import java.util.*;\n" +
+        return  "import java.util.*;\n" +
                 "\n" +
                 "public class javademo {\n" +
                 "\n" +
-                "    private static ArrayList<Integer> nodes = Utils.Compile.nodes;\n" +
-                "    private static ArrayList<ArrayList<Integer>> edges = Compile.edges;\n" +
+                "    private static ArrayList<Integer> nodes = null;\n" +
+                "    private static ArrayList<ArrayList<Integer>> edges = null;\n" +
+                "    private static ArrayList<Double> weights = null;\n" +
                 "\n" +
                 "    public static ArrayList<Integer> run() {\n" +
                 "        ArrayList<Integer> result = new ArrayList<>();\n" +
@@ -110,15 +106,18 @@ public class GraphTemplateCode {
                 "}";
     }
 
+    /**
+     * Returneaza codul necesar pentru sablonul care contine alboritmul depth first search (DFS)
+     * @return codul necesar
+     */
     private static String dfs() {
-        return "import Utils.Compile;\n" +
-                "\n" +
-                "import java.util.*;\n" +
+        return  "import java.util.*;\n" +
                 "\n" +
                 "public class javademo {\n" +
                 "\n" +
-                "    private static ArrayList<Integer> nodes = Utils.Compile.nodes;\n" +
-                "    private static ArrayList<ArrayList<Integer>> edges = Compile.edges;\n" +
+                "    private static ArrayList<Integer> nodes = null;\n" +
+                "    private static ArrayList<ArrayList<Integer>> edges = null;\n" +
+                "    private static ArrayList<Double> weights = null;\n" +
                 "\n" +
                 "    public static ArrayList<Integer> run() {\n" +
                 "        ArrayList<Integer> result = new ArrayList<>();\n" +

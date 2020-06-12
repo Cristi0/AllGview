@@ -6,8 +6,33 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LocalRepo implements Repository {
+public class LocalRepo implements Repo {
 
+    private static LocalRepo repo = null;
+
+    private LocalRepo() {
+    }
+
+    /**
+     * Creeaza o singura data obiectul LocalRepository, daca nu este deja creat, si trimite obiectul
+     * @return  LocalRepo
+     */
+    public static LocalRepo getRepository() {
+        if (repo == null) {
+            repo = new LocalRepo();
+        }
+        return repo;
+    }
+
+    /**
+     * Salveaza intr-un fisier local datele:
+     * data[0] - List<Pair<Double,Double>>> unde fiecare pair este pozitia x, respectiv y a unui nod pe ecran
+     * data[1] - List<Pair<Integer,Integer>>, fiecare pair este reprezentate de id-ul primului nod respectiv id-ul celui de-al doilea nod, ea reprezinta legatura dintre aceste noduri
+     * data[2] - List<Double>, fiecare valoare, reprezinta ponderea fiecarui legauri in aceeasi oridine cu data[1], poate fi optional,
+     * data[3] - String, este codul sursa
+     * @param file, locatia unde se vor salva datele, contine si numele fisierului, impreuna cu extensia
+     * @param data, size = 4
+     */
     @Override
     public void save(File file, Object... data) {
         try {
@@ -22,7 +47,13 @@ public class LocalRepo implements Repository {
                 bw.write(connection.getKey() + "," + connection.getValue() + ",");
             }
             bw.newLine();
-            String code = (String) data[2];
+            System.out.println(data[2]);
+            List<Double> weight = (List<Double>) data[2];
+            for (Double w : weight) {
+                bw.write(w + ",");
+            }
+            bw.newLine();
+            String code = (String) data[3];
             bw.write(code);
             bw.flush();
             bw.close();
@@ -31,9 +62,18 @@ public class LocalRepo implements Repository {
         }
     }
 
+    /**
+     * Incarca datale din fisier. La returnare:
+     * data[0] - List<Pair<Double,Double>>> unde fiecare pair este pozitia x, respectiv y a unui nod pe ecran
+     * data[1] - List<Pair<Integer,Integer>>, fiecare pair este reprezentate de id-ul primului nod respectiv id-ul celui de-al doilea nod, ea reprezinta legatura dintre aceste noduri
+     * data[2] - List<Double>, fiecare valoare, reprezinta ponderea fiecarui legauri in aceeasi oridine cu data[1], poate fi optional
+     * data[3] - String, este codul sursa
+     * @param file locatia unde se vor salva datele, contine si numele fisierului, impreuna cu extensia
+     * @return un array de 4 elemente
+     */
     @Override
     public Object[] load(File file) {
-        Object[] data = new Object[3];
+        Object[] data = new Object[4];
         try {
             BufferedReader br = new BufferedReader(new FileReader(file));
             List<Pair<Double, Double>> nodes = new ArrayList<>();
@@ -45,8 +85,16 @@ public class LocalRepo implements Repository {
             String second = br.readLine();
             n = second.split(",");
             List<Pair<Integer, Integer>> connections = new ArrayList<>();
-            for (int i = 0; i < n.length; i+=2) {
+            for (int i = 0; i < n.length; i += 2) {
                 connections.add(new Pair<>(Integer.valueOf(n[i]), Integer.valueOf(n[i + 1])));
+            }
+            String third = br.readLine();
+            List<Double> weights = new ArrayList<>();
+            if(!third.equals("")) {
+                n = third.split(",");
+                for (String s : n) {
+                    weights.add(Double.valueOf(s));
+                }
             }
             StringBuilder code = new StringBuilder();
             String s;
@@ -57,7 +105,8 @@ public class LocalRepo implements Repository {
             br.close();
             data[0] = nodes;
             data[1] = connections;
-            data[2] = code.toString();
+            data[2] = weights;
+            data[3] = code.toString();
         } catch (IOException e) {
             e.printStackTrace();
         }

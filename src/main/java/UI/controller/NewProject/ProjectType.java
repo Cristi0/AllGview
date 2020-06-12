@@ -28,6 +28,13 @@ public class ProjectType extends Controller {
     public Integer template = -1; //Selecteaza template de grafic de la 1 la n
     public Integer pozition = 0; // pozitia la care se afla in procesul de creare a unui nou proiect
 
+    /**
+     * Initializarea datelor.
+     * Se seteaza butonul previous ca invizibil.
+     *                    next ca sa nu se poata selecta
+     * @param location
+     * @param resources
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         if (PreviousButton != null) {
@@ -39,6 +46,12 @@ public class ProjectType extends Controller {
 
     }
 
+    /**
+     * Parcuge in continuare wizardul de creare a unui nou proiect.
+     * Se seteaza butoanele accesibile si invizibile la un pas urmator iar la final se trimit datele dupa care se inchide wizardul
+     * @param actionEvent
+     * @throws UnexpectedException
+     */
     public void goForword(ActionEvent actionEvent) throws UnexpectedException {
         switch (pozition) {
             case 0:
@@ -59,6 +72,12 @@ public class ProjectType extends Controller {
 
     }
 
+    /**
+     * Returnarea la meniul anterior.
+     * Se seteaza butoanele accesibile si vizibile pentru pasul respectiv
+     * @param event
+     * @throws UnexpectedException
+     */
     public void goBack(ActionEvent event) throws UnexpectedException {
         switch (pozition) {
             case 1:
@@ -74,6 +93,10 @@ public class ProjectType extends Controller {
 
     }
 
+    /**
+     * Schimba continutul wizardului la un anumit pas
+     * @param filename numele fisierului fxml care are continului acestui wizard
+     */
     private void changeTo(String filename) {
         try {
             changeContent(filename);

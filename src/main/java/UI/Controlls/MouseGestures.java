@@ -14,6 +14,10 @@ public class MouseGestures {
 
     DragContext dragContext = new DragContext();
 
+    /**
+     * Seteaza un nod sa poata fie mutat cu mouse-ul
+     * @param node
+     */
     public void makeDraggable( Node node) {
 
         node.setOnMousePressed( onMousePressedEventHandler);

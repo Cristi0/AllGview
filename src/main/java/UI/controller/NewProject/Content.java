@@ -19,6 +19,12 @@ public class Content extends Controller {
 
     }
 
+    /**
+     * Seteaza butoanelor de nex si back in functie de naviagrea curenta.
+     * Se trimit parintelui valorile selectate
+     * @param mouseEvent
+     * @throws UnexpectedException
+     */
     public void selected(MouseEvent mouseEvent) throws UnexpectedException {
         ProjectType parent = ((ProjectType)Creator);
         switch (parent.pozition) {

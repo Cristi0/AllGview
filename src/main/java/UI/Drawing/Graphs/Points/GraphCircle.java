@@ -14,13 +14,16 @@ public class GraphCircle implements Point {
     float blue = 0;
     float opacity = 0.5f;
 
+    /**
+     * Numarul cercului curent.
+     * @return intreg
+     */
     private int getNumberCircle(){
         return GraphController.drawable.size();
     }
 
     /**
      * Creeaza un stackPane si atribuie proprietatile necesare
-     *
      * @return Stackpane
      */
     private StackPane stackPaneProperties(double x, double y) {
@@ -34,7 +37,6 @@ public class GraphCircle implements Point {
 
     /**
      * Creeaza un cerc si atribuie proprietatile necesare
-     *
      * @return Circle
      */
     private Circle circleProperties() {
@@ -53,6 +55,11 @@ public class GraphCircle implements Point {
         return circle;
     }
 
+    /**
+     * Crearea vizuala a numarului cercului
+     * @param circle, pozitia cercului
+     * @return Text, numarul cercului
+     */
     public Text drawCircleNumber(Circle circle) {
         Text text = new Text((getNumberCircle() + 1) + "");
         text.translateXProperty().bindBidirectional(circle.translateXProperty());
@@ -62,6 +69,12 @@ public class GraphCircle implements Point {
         return text;
     }
 
+    /**
+     * Deseneaza nodul, un cerc, unde in interiorul acestuia se afla un numar
+     * @param x, valoarea de pe coordonata x
+     * @param y, valoarea de pe coordonata y
+     * @return nodul
+     */
     @Override
     public StackPane draw(double x, double y) {
         StackPane stack = stackPaneProperties(x, y);
@@ -69,7 +82,7 @@ public class GraphCircle implements Point {
         Circle circle = circleProperties();
 
         Text text = drawCircleNumber(circle);
-        stack.getChildren().addAll(circle, text);//todo:
+        stack.getChildren().addAll(circle, text);
         return stack;
     }
 }

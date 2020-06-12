@@ -22,13 +22,12 @@ public class DashboardController extends Controller {
 
     }
 
-    public void createNewProject(ActionEvent actionEvent) throws IOException {  //todo: Deal with exception
-//        try {
-//            createProjectFromData(1,3);
-//        } catch (UnexpectedException e) {
-//            e.printStackTrace();
-//        }
-        //todo:De DECOMENTAT
+    /**
+     * Creeaza o noua fereastra unde se va afisar wizad-ul pentru crearea unui nou proiect
+     * @param actionEvent
+     * @throws IOException
+     */
+    public void createNewProject(ActionEvent actionEvent) throws IOException {
         FXMLLoader rootfxmlLoader = new FXMLLoader(getClass().getResource("/fxml/NewProject/ProjectType.fxml"));
         Parent root = rootfxmlLoader.load();
 
@@ -55,6 +54,12 @@ public class DashboardController extends Controller {
         newWindow.show();
     }
 
+    /**
+     * Schimba continutul ferestrei in functie de parametrii dati
+     * @param type tipul de vizualizare
+     * @param template sablonul ales
+     * @throws UnexpectedException
+     */
     public void createProjectFromData(Integer type, Integer template) throws UnexpectedException {
         try {
             switch (type){
