@@ -5,8 +5,10 @@ import Service.MainService;
 import javafx.beans.property.SimpleFloatProperty;
 
 import javax.tools.*;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
@@ -205,7 +207,15 @@ public class Compile {
         Class javaDemoClass = urlClassLoader.loadClass(className);
         Method method = javaDemoClass.getMethod("run");
         Object obj = new Object();
+
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        PrintStream ps = new PrintStream(baos);
+        PrintStream old = System.out;
+        System.setOut(ps);
         Object ret = method.invoke(obj);
+        System.out.flush();
+        System.setOut(old);
+        errors+=baos.toString();
         return ret;
     }
 }

@@ -33,6 +33,7 @@ public class StraightLine implements Line {
     public Shape draw(StackPane stack) {
         if (previous == null) {
             javafx.scene.shape.Line line = new javafx.scene.shape.Line();
+            line.setStrokeWidth(2);
 
             line.setStartX(stack.getTranslateX() + stack.getWidth() / 2);
             line.setStartY(stack.getTranslateY() + stack.getHeight() / 2);

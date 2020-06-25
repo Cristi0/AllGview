@@ -554,7 +554,7 @@ public class GraphController extends Controller {
                     }
                     previous.setFill(Color.color(0.7, 0.7, 0.9));
                 } catch (InterruptedException e) {
-                    System.out.println("Thread intrerupt de user"); //todo: logs
+                    System.out.println("Thread intrerupt de user");
                 }
                 animation = null;
             });

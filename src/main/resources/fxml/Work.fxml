@@ -25,11 +25,6 @@
                         <AnchorPane fx:id="currentpane" onMouseClicked="#draw" style="-fx-background-color: white;" BorderPane.alignment="CENTER" />
                      </content>
                   </Tab>
-                  <Tab text="Untitled Tab 2">
-                     <content>
-                        <AnchorPane prefHeight="380.0" prefWidth="365.0" />
-                     </content>
-                  </Tab>
                </tabs>
             </TabPane>
          </children>
