@@ -37,6 +37,10 @@ public class MainController extends Controller {
 
     public static Label Hint =null;
     public static final String HintString = "Hint: Hover on an object in order to tell what it can do.";
+    public HBox DashBoardButton;
+    public HBox ProjectsButton;
+    public HBox SettingsButton;
+    public HBox ContactSupportButton;
     // public Button menu_opener;
     // public AnchorPane left_panel;
     private Animations animation = new Animations();
@@ -52,6 +56,11 @@ public class MainController extends Controller {
         TextStatus.setText("");
         Hint=HintIndicator;
         HintIndicator.setWrapText(true);
+        hintButton(DashBoardButton,"Go to dashboard page.");
+        hintButton(ProjectsButton,"Go to projects page.");
+        hintButton(SettingsButton,"Go to settings page.");
+        hintButton(ContactSupportButton,"Go to contact support page.");
+        hintButton(menu_opener,"Open or close menu.");
     }
 
     /**

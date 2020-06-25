@@ -85,7 +85,7 @@
                   <Insets />
                </VBox.margin>
             </HBox>
-            <HBox alignment="CENTER_LEFT" minWidth="35.0" onMouseClicked="#goToDashboard" styleClass="hover_border">
+            <HBox fx:id="DashBoardButton" alignment="CENTER_LEFT" minWidth="35.0" onMouseClicked="#goToDashboard" styleClass="hover_border">
                <children>
                   <FontAwesomeIconView fill="#485460" glyphName="CIRCLE_ALT_NOTCH" size="1.5em" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: Quicksand; -fx-font-weight: bold; -fx-fill: #485460;" text="Dashboard">
@@ -98,7 +98,7 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>
             </HBox>
-            <HBox alignment="CENTER_LEFT" minWidth="35.0" onMouseClicked="#goToProjects" styleClass="hover_border">
+            <HBox fx:id="ProjectsButton" alignment="CENTER_LEFT" minWidth="35.0" onMouseClicked="#goToProjects" styleClass="hover_border">
                <children>
                   <FontAwesomeIconView fill="#485460" glyphName="CALENDAR_ALT" size="1.5em" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: Quicksand; -fx-font-weight: bold; -fx-fill: #485460;" text="Projects">
@@ -116,7 +116,7 @@
             </HBox>
             <VBox alignment="CENTER" minWidth="35.0" VBox.vgrow="ALWAYS">
                <children>
-                  <HBox alignment="CENTER_LEFT" minWidth="35.0" onMouseClicked="#goToSettings" styleClass="hover_border">
+                  <HBox fx:id="SettingsButton" alignment="CENTER_LEFT" minWidth="35.0" onMouseClicked="#goToSettings" styleClass="hover_border">
                      <children>
                         <FontAwesomeIconView fill="#485460" glyphName="COG" size="1.5em" />
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: Quicksand; -fx-font-weight: bold; -fx-fill: #485460;" text="Settings">
@@ -129,7 +129,7 @@
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </padding>
                   </HBox>
-                  <HBox alignment="CENTER_LEFT" minWidth="35.0" onMouseClicked="#goToContactSupport" styleClass="hover_border">
+                  <HBox fx:id="ContactSupportButton" alignment="CENTER_LEFT" minWidth="35.0" onMouseClicked="#goToContactSupport" styleClass="hover_border">
                      <children>
                         <FontAwesomeIconView fill="#485460" glyphName="USER" size="1.5em" />
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: Quicksand; -fx-font-weight: bold; -fx-fill: #485460;" text="Contact Support">

@@ -19,12 +19,7 @@ public class ProjectsController extends Controller {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        CreateProjectButton.setOnMouseEntered((event)->{
-            MainController.Hint.setText("Hint: Create a new project");
-        });
-        CreateProjectButton.setOnMouseExited(event -> {
-            MainController.Hint.setText(MainController.HintString);
-        });
+        hintButton(CreateProjectButton,"Create a new project.");
     }
 
     /**

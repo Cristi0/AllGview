@@ -2,7 +2,10 @@ package UI.controller;
 
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -38,5 +41,14 @@ public abstract class Controller implements Initializable {
         Created = ctrl;
         ctrl.Creator = this;
         ctrl.load();
+    }
+
+    protected void hintButton(Node button, String text){
+        button.setOnMouseEntered((event)->{
+            MainController.Hint.setText("Hint: "+text);
+        });
+        button.setOnMouseExited(event -> {
+            MainController.Hint.setText(MainController.HintString);
+        });
     }
 }

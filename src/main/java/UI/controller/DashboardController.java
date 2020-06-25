@@ -28,6 +28,8 @@ public class DashboardController extends Controller {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        hintButton(CreateProjectButton,"Create a new project.");
+        hintButton(ProjectsButton,"Go to Projects page.");
 
     }
 

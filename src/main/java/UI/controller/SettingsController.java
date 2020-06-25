@@ -22,6 +22,7 @@ public class SettingsController extends Controller {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        hintButton(ShowHints,"Show or hide hints.");
         ShowHints.setSelected(Main.hasHints);
     }
 }

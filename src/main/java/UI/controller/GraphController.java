@@ -89,14 +89,7 @@ public class GraphController extends Controller {
         StartAnimation.setDisable(true);
     }
 
-    private void hintButton(Button button, String text){
-        button.setOnMouseEntered((event)->{
-            MainController.Hint.setText("Hint: "+text);
-        });
-        button.setOnMouseExited(event -> {
-            MainController.Hint.setText(MainController.HintString);
-        });
-    }
+
     /**
      * Initializeaza datele si seteaza meniurile pentru zonele din aplicatie
      *
